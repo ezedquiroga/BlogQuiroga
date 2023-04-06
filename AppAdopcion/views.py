@@ -1,11 +1,16 @@
+from django.http import request
 from django.shortcuts import render
 from AppAdopcion.models import Mascota, Comentario
-from AppAdopcion.forms import MascotaForm, ComentarioForm
+from AppAdopcion.forms import OfrecerAdopcionForm, ComentarioForm
+
+
+def home(request):
+    return render(request, "base.html")
 
 def ofrecer_adopcion(request):
     all_mascotas = Mascota.objects.all()
     if request.method == "POST":
-        mi_formulario = MascotaForm(request.POST)
+        mi_formulario = OfrecerAdopcionForm(request.POST)
 
         if mi_formulario.is_valid():
             informacion = mi_formulario.cleaned_data
@@ -14,13 +19,12 @@ def ofrecer_adopcion(request):
                 edad=informacion['edad'],
                 genero=informacion['genero'],
                 vacunas=informacion['vacunas'],
-                condicion_medica=informacion['condicio_medica'],
-                castrado_a=informacion['castrado_a'],
-                foto=informacion['foto']
+                condicion_medica=informacion['condicion_medica'],
+                castrado_a=informacion['castrado_a']
             )
             mascota_save.save()
     context = {
         "mascotas": all_mascotas,
-        "form": MascotaForm()
+        "form": OfrecerAdopcionForm()
     }
-    return render(request, "AppAdop/mascota.html", context=context)
+    return render(request, "AppAdop/ofrecer_adopcion.html", context=context)

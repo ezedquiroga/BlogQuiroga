@@ -1,7 +1,7 @@
 from django import forms
 from AppAdopcion.models import Mascota, Comentario
 
-class MascotaForm(forms.Form):
+class OfrecerAdopcionForm(forms.Form):
 
     nombre = forms.CharField(max_length=15)
     edad = forms.CharField(max_length=8)
