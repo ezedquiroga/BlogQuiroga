@@ -23,7 +23,13 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" >{{ user.username }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'AccountLogout' %}">Logout</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'AccountRegistrar' %}">Registrar</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'AccountLogin' %}">Login</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -47,22 +53,32 @@
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
                         {% block lista_cambia %}
-                        Mensage de bienvenida
+                        Bienvenido a nuestro Hogar de Mascotas, trabajamos para que nuestros amigos puedan tener una familia.
+                        Necesitamos que se registre, para ofrecer una adopción o elegir entre los candidatos/as.
                         {% endblock %}
-
+                        {% block login_cambia %}
+                        {% endblock %}
                     </div>
+                    {% block logout_cambia %}
+                    {% endblock %}
                 </div>
                 <!-- Side widgets-->
                 <div class="col-lg-4">
                     <!-- Search widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Search</div>
+                        {% if user.is_authenticated %}
+                        <div class="card-header">Complete el formulario, para ofrecer una adopción</div>
                         <div class="card-body">
                             <div class="input-group">
                                 {% block formulario_cambia %}
                                 <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
                                 <button class="btn btn-primary" id="button-search" type="button">Go!</button>
                                 {% endblock %}
+                        {% else %}
+                        <div class="card-header"></div>
+                        <div class="card-body">
+                            <div class="input-group">
+                        {% endif %}
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,3 @@
-from django.http import request
 from django.shortcuts import render
 from AppAdopcion.models import Mascota, Comentario
 from AppAdopcion.forms import OfrecerAdopcionForm, ComentarioForm
@@ -6,6 +5,7 @@ from AppAdopcion.forms import OfrecerAdopcionForm, ComentarioForm
 
 def home(request):
     return render(request, "base.html")
+
 
 def ofrecer_adopcion(request):
     all_mascotas = Mascota.objects.all()
