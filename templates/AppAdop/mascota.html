@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block contenido_cambia %}
+<h3>Completa los datos solicitados, para ofrecer una adopcion</h3>
+    <form> action="{% url 'AplicacionAdopcion' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Publicar">
+    </form>
+{% endblock %}
