@@ -9,6 +9,7 @@ class OfrecerAdopcionForm(forms.Form):
     vacunas = forms.CharField(max_length=20)
     condicion_medica = forms.CharField(max_length=20)
     castrado_a = forms.CharField(max_length=2)
+    foto = forms.ImageField()
 
 
 class ComentarioForm(forms.ModelForm):
