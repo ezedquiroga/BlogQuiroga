@@ -8,7 +8,7 @@ class Mascota(models.Model):
     vacunas = models.CharField(max_length=20)
     condicion_medica = models.CharField(max_length=20)
     castrado_a = models.CharField(max_length=2)
-    foto = models.ImageField(null=True, blank=True, upload_to="imagenes/")
+    foto = models.ImageField(upload_to="imagenes", null=True)
 
     def __str__(self):
         return self.nombre
