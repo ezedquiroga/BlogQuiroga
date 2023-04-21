@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from AppAdopcion.models import Mascota, Comentario
 from AppAdopcion.forms import OfrecerAdopcionForm, ComentarioForm
+from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 
 def home(request):
@@ -8,7 +12,6 @@ def home(request):
 
 
 def ofrecer_adopcion(request):
-
     all_mascotas = Mascota.objects.all()
     if request.method == "POST":
         mi_formulario = OfrecerAdopcionForm(request.POST, request.FILES)
@@ -53,3 +56,19 @@ def editar_adopcion(request, nombre):
         })
     }
     return render(request, "AppAdop/editar_adopcion.html", context=context)
+
+
+class ComentarioView(LoginRequiredMixin, CreateView):
+    model = Comentario
+    form_class = ComentarioForm
+    template_name = 'AppAdop/comentario.html'
+    success_url = reverse_lazy('AplicacionAdopcion')
+
+    def form_valid(self, form1):
+        form1.instance.comentario_id = self.kwargs['pk']
+        return super(ComentarioView, self).form_valid(form1)
+
+class MascotaDetalle(LoginRequiredMixin, DetailView):
+    model = Mascota
+    context_object_name = 'mascota'
+    template_name = 'AppAdop/detalles.html'

@@ -15,8 +15,8 @@ class OfrecerAdopcionForm(forms.Form):
 class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentario
-        fields = ( 'nombre', 'mensaje' )
+        fields = ('nombre', 'mensaje')
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
-            'mensqaje': forms.Textarea(attrs={'class': 'form-control'}),
+            'mensaje': forms.Textarea(attrs={'class': 'form-control'}),
         }

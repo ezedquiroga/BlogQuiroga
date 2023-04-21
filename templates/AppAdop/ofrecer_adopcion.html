@@ -13,12 +13,23 @@
 <div class="col-lg-6">
     <!-- Blog post-->
     <div class="card mb-4">
-        <a href="#!"><img class="card-img-top" src="{{ mascota.foto.url }}" alt="mascota" height="320px"/></a>
+        <a href="{% url 'AplicacionDetalles' %}"><img class="card-img-top" src="{{ mascota.foto.url }}" alt="mascota" height="320px"/></a>
         <div class="card-body">
             <div class="small text-muted">06/04/2023</div>
             <h2 class="card-title h4">{{ mascota.nombre }}</h2>
             <p class="card-text">Edad: {{ mascota.edad }} Genero: {{ mascota.genero }}</p>
 
+            {% block comentario %}
+                <div class="container">
+                <h4>Deja tu comentario</h4>
+                </div>
+                <div class="form-group">
+                    <form method="post">{% csrf_token %}
+                        {{ form1.as_p }}
+                        <button type="submit" class="btn btn-primary">Comentar</button>
+                    </form>
+                </div>
+            {% endblock %}
         </div>
     </div>
 </div>
