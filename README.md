@@ -1,3 +1,3 @@
 # BlogQuiroga
 Ezequiel Dario Quiroga
-Creacion de un blog para uhn refugio de mascotas
+Creacion de blog para un refugio de mascotas
